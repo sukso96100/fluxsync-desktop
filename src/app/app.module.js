@@ -11,8 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
-var device_component_1 = require('./device.component');
 var router_1 = require('@angular/router');
+//components
+var device_component_1 = require('./device.component');
+var sms_component_1 = require('./sms.component');
+var settings_component_1 = require('./settings.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,12 +27,22 @@ var AppModule = (function () {
                     {
                         path: 'device',
                         component: device_component_1.DeviceComponent
+                    },
+                    {
+                        path: 'sms',
+                        component: sms_component_1.SmsComponent
+                    },
+                    {
+                        path: 'settings',
+                        component: settings_component_1.SettingsComponent
                     }
                 ])
             ],
             declarations: [
                 app_component_1.AppComponent,
-                device_component_1.DeviceComponent
+                device_component_1.DeviceComponent,
+                sms_component_1.SmsComponent,
+                settings_component_1.SettingsComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
