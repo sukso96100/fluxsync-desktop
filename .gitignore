@@ -57,4 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# macOS
 .DS_Store
+
+# Compiled Typescript (*.js, *.js.map)
+src/app/*.js
+src/app/*.js.map
