@@ -28,3 +28,11 @@ div.main-menu{
   width: 200px;
   height: 200px;
 }
+
+device, sms, settings{
+  width: 100%;
+}
+
+div.left-pane{
+  float: left;
+}
