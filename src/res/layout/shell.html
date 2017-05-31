@@ -1,0 +1,32 @@
+<div class="window">
+  <div class="window-content">
+    <div class="pane-group">
+      <div class="pane-mini sidebar main-menu">
+        <!-- Main Menu -->
+        <ul class="main-menu">
+          <a routerLink="/device">
+            <li>
+              <span class="icon icon-mobile"></span>
+            </li>
+          </a>
+          <a routerLink="/clipboard">
+            <li>
+              <span class="icon icon-attach"></span>
+            </li>
+          </a>
+          <a routerLink="/sms">
+            <li>
+              <span class="icon icon-chat"></span>
+            </li>
+          </a>
+          <a routerLink="/settings">
+            <li>
+              <span class="icon icon-cog"></span>
+            </li>
+          </a>
+        </ul>
+      </div>
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
