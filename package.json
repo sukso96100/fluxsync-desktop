@@ -19,7 +19,8 @@
     "test": "concurrently \"npm run build:watch\" \"karma start karma.conf.js\"",
     "pretest:once": "npm run build",
     "test:once": "karma start karma.conf.js --single-run",
-    "lint": "tslint ./src/**/*.ts -t verbose"
+    "lint": "tslint ./src/**/*.ts -t verbose",
+    "clean": "concurrently \"rm ./src/app/*.js\" \"rm ./src/app/*.js.map\""
   },
   "keywords": [],
   "author": "",
@@ -34,10 +35,13 @@
     "@angular/platform-browser-dynamic": "~2.4.0",
     "@angular/router": "~3.4.0",
     "angular-in-memory-web-api": "~0.2.4",
+    "bluetooth-serial-port": "^2.1.2",
     "core-js": "^2.4.1",
-    "freedom-for-node": "^0.2.20",
+    "electron-settings": "^3.0.14",
     "rxjs": "5.0.1",
+    "simple-peer": "^8.1.0",
     "systemjs": "0.19.40",
+    "wrtc": "0.0.61",
     "zone.js": "^0.7.4"
   },
   "devDependencies": {

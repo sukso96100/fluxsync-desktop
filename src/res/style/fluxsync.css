@@ -29,10 +29,11 @@ div.main-menu{
   height: 200px;
 }
 
-device, sms, settings{
+device, clipboard, sms, settings{
   width: 100%;
 }
 
 div.left-pane{
   float: left;
+  height: 100%;
 }

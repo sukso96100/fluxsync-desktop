@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 //components
 import { DeviceComponent } from './device.component'
+import { ClipboardComponent } from './clipboard.component'
 import { SmsComponent } from './sms.component'
 import { SettingsComponent } from './settings.component'
 
@@ -15,6 +16,10 @@ import { SettingsComponent } from './settings.component'
       {
         path: 'device',
         component: DeviceComponent
+      },
+      {
+        path: 'clipboard',
+        component: ClipboardComponent
       },
       {
         path: 'sms',
@@ -29,6 +34,7 @@ import { SettingsComponent } from './settings.component'
   declarations: [
     AppComponent,
     DeviceComponent,
+    ClipboardComponent,
     SmsComponent,
     SettingsComponent
   ],
