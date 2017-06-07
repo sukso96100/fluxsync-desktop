@@ -4,4 +4,12 @@ import { Component } from '@angular/core';
   selector: 'device',
   templateUrl: 'res/layout/device.html'
 })
-export class DeviceComponent { }
+export class DeviceComponent {
+  disconnectFromDevice(){
+
+  }
+
+  findDevice(){
+    console.log("Looking for device.")
+  }
+}

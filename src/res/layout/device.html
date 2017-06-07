@@ -1,38 +1,16 @@
-<div class="left-pane">
-  <ul class="list-group">
-  <li class="list-group-header">
-    <input class="form-control" type="text" placeholder="Search for someone">
-  </li>
-  <li class="list-group-item">
-    <img class="img-circle media-object pull-left" src="/res/img/icon.png" width="32" height="32">
-    <div class="media-body">
-      <strong>List item title</strong>
-      <p>Lorem ipsum dolor sit amet.</p>
-    </div>
-  </li>
-
-  ...
-</ul>
-</div>
-<div>
-  <ul class="list-group">
-  <li class="list-group-header">
-    <input class="form-control" type="text" placeholder="Search for someone">
-  </li>
-  <li class="list-group-item">
-    <img class="img-circle media-object pull-left" src="/assets/img/avatar.jpg" width="32" height="32">
-    <div class="media-body">
-      <strong>List item title</strong>
-      <p>Lorem ipsum dolor sit amet.</p>
-    </div>
-  </li>
-  <li class="list-group-item">
-    <img class="img-circle media-object pull-left" src="/assets/img/avatar2.png" width="32" height="32">
-    <div class="media-body">
-      <strong>List item title</strong>
-      <p>Lorem ipsum dolor sit amet.</p>
-    </div>
-  </li>
-  ...
-</ul>
+<header class="app-header">
+  <span>Device</span>
+</header>
+<div class="device">
+  <div >
+    <span class="icon icon-mobile" style="font-size:4em;"></span>
+    <h2 id="device-name">Device Name</h2>
+    <p id="device-address">
+      Device Address
+    </p>
+    <p id="device-status">
+      Status
+    </p>
+    <button class="btn btn-large btn-default" (click)="findDevice()">Connect</button>
+  </div>
 </div>

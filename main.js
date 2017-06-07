@@ -15,7 +15,7 @@ function createWindow () {
   //Load and show System Trayele
   require('./src/main/tray').showTray(path.join(__dirname, 'src/res/img/tray.png'));
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 400, height: 600, titleBarStyle: 'hidden'})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({

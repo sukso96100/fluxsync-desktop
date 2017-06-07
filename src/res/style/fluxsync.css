@@ -37,3 +37,23 @@ div.left-pane{
   float: left;
   height: 100%;
 }
+
+div.device{
+  text-align: center;
+  padding-top: 100px;
+}
+
+.app-header{
+  -webkit-app-region: drag;
+}
+
+.app-title{
+  padding: 16px;
+}
+
+header.app-header{
+  -webkit-app-region: drag;
+  width: 100%;
+  padding:16px;
+  border-bottom: thin solid #ddd;
+}

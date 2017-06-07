@@ -13,22 +13,11 @@ import { SettingsComponent } from './settings.component'
   imports:      [
     BrowserModule,
     RouterModule.forRoot([
-      {
-        path: 'device',
-        component: DeviceComponent
-      },
-      {
-        path: 'clipboard',
-        component: ClipboardComponent
-      },
-      {
-        path: 'sms',
-        component: SmsComponent
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent
-      }
+      { path: '', redirectTo: 'device', pathMatch: 'full' },
+      { path: 'device', component: DeviceComponent },
+      { path: 'clipboard', component: ClipboardComponent },
+      { path: 'sms', component: SmsComponent },
+      { path: 'settings', component: SettingsComponent }
     ])
   ],
   declarations: [
