@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'settings',
-  templateUrl: 'res/layout/clipboard.html'
+  templateUrl: '../res/layout/settings.html'
 })
-export class ClipboardComponent { }
+export class SettingsComponent { }
