@@ -1,20 +1,11 @@
 {
   "name": "FluxSync",
   "version": "0.0.0",
-  "main": "dist/main/main.js",
+  "main": "start.js",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "ng:build": "ng build",
-    "ng:test": "ng test",
-    "ng:lint": "ng lint",
-    "ng:e2e": "ng e2e",
-    "build:main": "webpack --config webpack.config.main.js --progress --profile --colors",
-    "build:rend": "ng build --output-path dist/rend/",
-    "cpimgs": "mkdir -p dist/res/img && cp -r src/res/img dist/res",
-    "build": "npm run cpimgs && npm run build:main && npm run build:rend",
-    "start": "npm run build && electron .",
-    "clean": "rm -rf dist"
+    "insdeps": "npm install && electron-rebuild .",
+    "start": "electron ."
   },
   "private": true,
   "dependencies": {
@@ -31,6 +22,8 @@
     "core-js": "^2.4.1",
     "electron-settings": "^3.1.1",
     "rxjs": "^5.1.0",
+    "vue": "^2.3.4",
+    "vue-router": "^2.6.0",
     "webpack": "^3.0.0",
     "zone.js": "^0.8.4"
   },
@@ -43,6 +36,7 @@
     "codelyzer": "~3.0.1",
     "concurrently": "^3.2.0",
     "electron": "^1.6.11",
+    "electron-rebuild": "^1.5.11",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",

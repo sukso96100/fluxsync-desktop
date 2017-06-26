@@ -14,12 +14,13 @@ let mainWindow
 function createWindow () {
   //Load and show System Trayele
   require('./tray').showTray(__dirname+'/../res/img/tray.png');
+  require('./bluetooth');
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 400, height: 600, titleBarStyle: 'hidden'})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '../rend/index.html'),
+    pathname: path.join(__dirname, '../res/layout/shell.html'),
     protocol: 'file:',
     slashes: true
   }))

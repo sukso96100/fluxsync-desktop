@@ -29,7 +29,7 @@ div.main-menu{
   height: 200px;
 }
 
-device, clipboard, sms, settings{
+.content{
   width: 100%;
 }
 

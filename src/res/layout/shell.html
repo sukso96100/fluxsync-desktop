@@ -1,32 +1,49 @@
-<div class="window">
-  <div class="window-content">
-    <div class="pane-group">
-      <div class="pane-mini sidebar main-menu">
-        <!-- Main Menu -->
-        <ul class="main-menu">
-          <a routerLink="/device">
-            <li>
-              <span class="icon icon-mobile"></span>
-            </li>
-          </a>
-          <a routerLink="/clipboard">
-            <li>
-              <span class="icon icon-attach"></span>
-            </li>
-          </a>
-          <a routerLink="/sms">
-            <li>
-              <span class="icon icon-chat"></span>
-            </li>
-          </a>
-          <a routerLink="/settings">
-            <li>
-              <span class="icon icon-cog"></span>
-            </li>
-          </a>
-        </ul>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FluxSync</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="../style/fluxsync.css">
+    <link rel="stylesheet" href="../style/photon.min.css">
+  </head>
+  <body>
+    <div class="window" id="app">
+      <div class="window-content">
+        <div class="pane-group">
+          <div class="pane-mini sidebar main-menu">
+            <!-- Main Menu -->
+            <ul class="main-menu">
+              <router-link to="/device">
+                <li>
+                  <span class="icon icon-mobile"></span>
+                </li>
+              </router-link>
+              <router-link to="/clipboard">
+                <li>
+                  <span class="icon icon-attach"></span>
+                </li>
+              </router-link>
+              <router-link to="/sms">
+                <li>
+                  <span class="icon icon-chat"></span>
+                </li>
+              </router-link>
+              <router-link to="/settings">
+                <li>
+                  <span class="icon icon-cog"></span>
+                </li>
+              </router-link>
+            </ul>
+          </div>
+            <router-view></router-view>
+        </div>
       </div>
-        <router-outlet></router-outlet>
     </div>
-  </div>
-</div>
+
+    <script src="../../rend/shell.js"></script>
+  </body>
+</html>

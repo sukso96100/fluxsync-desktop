@@ -9,21 +9,25 @@ const {ipcMain} = require('electron');
 
 // When user requests to find new bluetooth device
 ipcMain.on('bluetooth.find', (event, arg) => {
+	console.log(`bluetooth.find : ${arg}`);
+	event.sender.send('bluetooth.found', 'Looking for devices...');
 	// Register device found event
   btSerial.on('found', (address, name) => {
-		btSerial.findSerialPortChannel(address, (channel) => {
-			if(channel == serviceUUID){
-				// Let user know device info
-				console.log('Found a device');
-				event.sender.send('bluetooth.find.callback',
-					JSON.stringify(`{"address":${address}, "name":${name}}`));
-			}else{
-				console.log('Device Found. but not service UUID match.');
-			}
-		}, () => {
-			// No Device Found!
-			console.log('No Device Found!');
-		});
+		console.log(`${address} : ${name}`);
+		event.sender.send('bluetooth.found', `${address} : ${name}`);
+		// btSerial.findSerialPortChannel(address, (channel) => {
+		// 	if(channel == serviceUUID){
+		// 		// Let user know device info
+		// 		console.log('Found a device');
+		// 		event.sender.send('bluetooth.find.callback',
+		// 			JSON.stringify(`{"address":${address}, "name":${name}}`));
+		// 	}else{
+		// 		console.log('Device Found. but not service UUID match.');
+		// 	}
+		// }, () => {
+		// 	// No Device Found!
+		// 	console.log('No Device Found!');
+		// });
 
 	});
 	// Start finding device
