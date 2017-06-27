@@ -47,6 +47,15 @@ div.device{
   -webkit-app-region: drag;
 }
 
+.app-header > .right{
+  float: right;
+}
+
+.app-header > span{
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .app-title{
   padding: 16px;
 }

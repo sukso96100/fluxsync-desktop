@@ -1,18 +1,21 @@
-module.paths.push(
-  __dirname,
-  __dirname + '/../res/img',
-__dirname + '/../res/layout');
 
+// Setup Path for modules
+module.paths.push(
+  __dirname + '/../../rend');
+
+// Load Vue.js and companions
 const Vue = require('vue/dist/vue.js');
 const VueRouter = require('vue-router');
 
+// Setup Router
 Vue.use(VueRouter)
 
-const Device = { template: require('./device.html').layout };
+const Device = require('../../rend/device');
 const Clipboard = { template: require('./clipboard.html').layout };
 const Sms = { template: require('./sms.html').layout };
 const Settings = { template: require('./settings.html').layout };
 const routes = [
+  { path: '/', redirect: '/device' },
   { path:'/device', component:Device },
   { path:'/clipboard', component:Clipboard },
   { path:'/sms', component: Sms },

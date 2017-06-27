@@ -13,7 +13,8 @@ exports.layout = `
         <p id="device-status">
           Status
         </p>
-        <button class="btn btn-large btn-default">Connect</button>
+        <button class="btn btn-large btn-default"
+          v-on:click="openScannerModal()">Connect</button>
       </div>
     </div>
   </div>
