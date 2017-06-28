@@ -9,28 +9,26 @@ const scanner = new Vue({
       electronRemote.getCurrentWindow().close();
     },
     refreshList: function(){
-      if(!this.isScanning){
-        this.isScanning = true;
+      if(!this.scanning){
+        this.scanning = true;
         ipcRenderer.send('bluetooth.find', 'new');
       }
     },
     startScan: function(){
-      this.isScanning = true;
+      this.scanning = true;
       ipcRenderer.send('bluetooth.find', 'new');
       ipcRenderer.on('bluetooth.found', (event, arg)=>{
-        let device = arg.split('\n')[0];
-        this.devices.push({ name:device[0], address:device[1] });
+        this.devices.push(JSON.parse(arg));
       });
       ipcRenderer.on('bluetooth.done', (event, arg)=>{
-        this.isScanning = false;
+        this.scanning = false;
       });
     }
   },
   data: {
     devices: [],
-    isScanning: true
+    scanning: true
   }
 });
 
 scanner.startScan();
-scanner.devices.push({ name:"Youngbin Han's OnePlus 3T", address:"c0-ee-fb-e8-59-85"});

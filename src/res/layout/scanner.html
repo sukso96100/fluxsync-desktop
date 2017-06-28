@@ -18,9 +18,9 @@
         <button class="btn btn-default" v-on:click="closeModal()">
             <span class="icon icon-left"></span>
           </button>
-        <span>Choose your device</span>
+        <span>{{ scanning ? "Scanning..." : "Select your device"}}</span>
         <button class="btn btn-default right" v-on:click="refreshList()"
-          disabled="{{isScanning}}">
+          v-bind:disabled="scanning">
             <span class="icon icon-ccw"></span>
           </button>
       </header>

@@ -14,7 +14,7 @@ ipcMain.on('bluetooth.find', (event, arg) => {
 		// Register device found event
 	  btSerial.on('found', (address, name) => {
 			console.log(`${address} : ${name}`);
-			event.sender.send('bluetooth.found', `${address}\n${name}`);
+			event.sender.send('bluetooth.found', JSON.stringify({"name":name, "address":address}));
 			// btSerial.findSerialPortChannel(address, (channel) => {
 			// 	if(channel == serviceUUID){
 			// 		// Let user know device info
@@ -30,12 +30,12 @@ ipcMain.on('bluetooth.find', (event, arg) => {
 			// });
 
 		});
-		btSerial.on('finished', ()=>{
-			event.sender.send('bluetooth.done', 'done');
-		});
 		// Start finding device
 		btSerial.inquire();
 		event.sender.send('bluetooth.find', 'Looking for devices...');
+		btSerial.on('finished', ()=>{
+			event.sender.send('bluetooth.done', 'done');
+		});
 	}else {
 		console.log(`bluetooth.find : Already Scanning!`);
 	}
