@@ -25,7 +25,8 @@
           </button>
       </header>
       <ul class="list-group">
-        <li class="list-group-item" v-for="device in devices">
+        <li class="list-group-item clickable" v-for="device in devices"
+         v-on:click="requestConnect(device.address)">
           <div class="media-body">
             <strong>{{ device.name }}</strong>
             <p>{{ device.address }}</p>

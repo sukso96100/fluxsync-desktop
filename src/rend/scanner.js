@@ -23,6 +23,12 @@ const scanner = new Vue({
       ipcRenderer.on('bluetooth.done', (event, arg)=>{
         this.scanning = false;
       });
+    },
+    requestConnect: function(address){
+      ipcRenderer.send('bluetooth.connect', address)
+      ipcRenderer.on('bluetooth.connected', (event, arg)=>{
+        closeModal()
+      });
     }
   },
   data: {

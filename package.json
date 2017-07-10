@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "insdeps": "npm install && electron-rebuild .",
+    "updeps": "npm update && electron-rebuild .",
     "start": "electron ."
   },
   "private": true,
@@ -12,10 +13,10 @@
     "bluetooth-serial-port": "^2.1.2",
     "electron-settings": "^3.1.1",
     "vue": "^2.3.4",
-    "vue-router": "^2.6.0"
+    "vue-router": "^2.7.0"
   },
   "devDependencies": {
-    "electron": "^1.6.11",
+    "electron": "^1.7.4",
     "electron-rebuild": "^1.5.11"
   }
 }
