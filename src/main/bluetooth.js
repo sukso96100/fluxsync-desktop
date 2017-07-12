@@ -32,8 +32,8 @@ ipcMain.on('bluetooth.find', (event, arg) => {
 ipcMain.on('bluetooth.connect', (event, arg) =>{
 	btSerial.findSerialPortChannel(arg, (channel) => {
 		btSerial.connect(arg, channel, () => {
-			console.log('bluetooth.connect : connected');
-			ipcMain.send('bluetooth.connected', arg)
+			console.log(`bluetooth.connect : connected with ${arg} ${channel}`);
+			event.sender.send('bluetooth.connected', arg)
 			btSerial.write(new Buffer('my data', 'utf-8'), (err, bytesWritten) => {
 				if (err) console.log(err);
 			});

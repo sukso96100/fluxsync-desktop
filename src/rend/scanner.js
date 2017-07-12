@@ -27,7 +27,7 @@ const scanner = new Vue({
     requestConnect: function(address){
       ipcRenderer.send('bluetooth.connect', address)
       ipcRenderer.on('bluetooth.connected', (event, arg)=>{
-        closeModal()
+        this.closeModal()
       });
     }
   },
