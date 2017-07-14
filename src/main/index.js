@@ -1,4 +1,5 @@
 const electron = require('electron');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -10,11 +11,14 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-
+console.log(process.version);
 function createWindow () {
-  //Load and show System Trayele
+  //Load and show System Tray
   require('./tray').showTray(__dirname+'/../res/img/tray.png');
-  require('./bluetooth');
+  // Init Secret
+  require('./initsecret');
+  // Start Websocket Server
+  require('./server');
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 400, height: 600, titleBarStyle: 'hidden'});
 
