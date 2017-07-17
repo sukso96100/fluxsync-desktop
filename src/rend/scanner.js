@@ -1,4 +1,5 @@
 const Vue = require('vue/dist/vue.js');
+const QRCode = require('qrcode');
 const {ipcRenderer} = require('electron');
 const electronRemote = require('electron').remote;
 
@@ -8,32 +9,44 @@ const scanner = new Vue({
     closeModal: function(){
       electronRemote.getCurrentWindow().close();
     },
-    refreshList: function(){
-      if(!this.scanning){
-        this.scanning = true;
-        ipcRenderer.send('bluetooth.find', 'new');
-      }
-    },
+    // refreshList: function(){
+    //   if(!this.scanning){
+    //     this.scanning = true;
+    //     ipcRenderer.send('device.find', 'new');
+    //   }
+    // },
     startScan: function(){
       this.scanning = true;
-      ipcRenderer.send('bluetooth.find', 'new');
-      ipcRenderer.on('bluetooth.found', (event, arg)=>{
+      ipcRenderer.send('device.find', 'new');
+      ipcRenderer.on('device.found', (event, arg)=>{
         this.devices.push(JSON.parse(arg));
       });
-      ipcRenderer.on('bluetooth.done', (event, arg)=>{
-        this.scanning = false;
-      });
     },
-    requestConnect: function(address){
-      ipcRenderer.send('bluetooth.connect', address)
-      ipcRenderer.on('bluetooth.connected', (event, arg)=>{
-        this.closeModal()
+    reqToken: function(id){
+      // Request token
+      ipcRenderer.send('device.token', id);
+      // Generate QR Code from token
+      ipcRenderer.on('device.token', (event, arg)=>{
+        this.showQr = true;
+        QRCode.toCanvas(document.getElementById('canvas'), arg,
+        (error)=>{
+          if (error) console.error(error)
+          console.log('success!');
+        });
+
       });
     }
+    // requestConnect: function(address){
+    //   ipcRenderer.send('device.connect', address)
+    //   ipcRenderer.on('device.connected', (event, arg)=>{
+    //     this.closeModal()
+    //   });
+    // }
   },
   data: {
     devices: [],
-    scanning: true
+    scanning: true,
+    showQr: false
   }
 });
 

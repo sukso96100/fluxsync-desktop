@@ -1,22 +1,25 @@
-module.exports = function(){
   const settings = require('electron-settings');
   const uuidv4 = require('uuid/v4');
   const keytar = require('keytar');
 
   // Check if this app has id. unless, create one.
-  if(keytar.getPassword('app', 'id') == null){
-    keytar.setPassword('app', 'id', uuidv4());
-  }
-  // always update hostname when app launched
-  settings.set('app.hostname', os.hostname());
+  keytar.getPassword('fluxsync', 'id').then(val=>{
+    if(val == null){
+      keytar.setPassword('fluxsync', 'id', uuidv4());
+    }
+  });
+
 
   // Generate JWT Secret
-  if(keytar.getPassword('app', 'jwt') == null){
-    keytar.setPassword('app', 'jwt', uuidv4());
-  }
+  keytar.getPassword('fluxsync', 'jwt').then(val=>{
+    if(val == null){
+    keytar.setPassword('fluxsync', 'jwt', uuidv4());
+    }
+  });
 
   // Generate Secret for encryption
-  if(keytar.getPassword('app', 'key') == null){
-    keytar.setPassword('app', 'key', uuidv4());
-  }
-};
+  keytar.getPassword('fluxsync', 'key').then(val=>{
+    if(val == null){
+    keytar.setPassword('fluxsync', 'key', uuidv4());
+    }
+  });

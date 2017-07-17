@@ -33,6 +33,10 @@ div.main-menu{
   width: 100%;
 }
 
+p.content{
+  padding: 8px;
+}
+
 div.left-pane{
   float: left;
   height: 100%;
