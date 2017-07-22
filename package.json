@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "bonjour": "^3.5.0",
     "electron-settings": "^3.1.1",
     "jsonwebtoken": "^7.4.1",
     "keytar": "^4.0.3",

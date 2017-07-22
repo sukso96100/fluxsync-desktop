@@ -2,6 +2,7 @@ const Vue = require('vue/dist/vue.js');
 const QRCode = require('qrcode');
 const {ipcRenderer} = require('electron');
 const electronRemote = require('electron').remote;
+const os = electronRemote.require('os');
 
 const scanner = new Vue({
   el: '#app',
@@ -46,7 +47,8 @@ const scanner = new Vue({
   data: {
     devices: [],
     scanning: true,
-    showQr: false
+    showQr: false,
+    hostname: os.hostname()
   }
 });
 

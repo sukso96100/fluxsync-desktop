@@ -19,21 +19,31 @@
             <span class="icon icon-left"></span>
           </button>
         <span>New Connection</span>
+
       </header>
-      <ul class="list-group" v-bind:hidden="showQr">
-        <li class="list-group-item clickable" v-for="device in devices"
-         v-on:click="reqToken(device.id)">
-          <div class="media-body">
-            <strong>{{ device.hostname }}</strong>
-            <p>{{ device.id }}</p>
-          </div>
-        </li>
-      </ul>
+      <div v-bind:hidden="showQr">
+        <div class="content">
+          Choose the name below on your mobile device.<br />
+          <b>{{hostname}}</b>
+        </div>
+        <ul class="list-group" >
+          <li class="list-group-item clickable" v-for="device in devices"
+           v-on:click="reqToken(device.id)">
+            <div class="media-body">
+              <strong>{{ device.hostname }}</strong>
+              <p>{{ device.id }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
       <div v-bind:hidden="!showQr">
         <canvas id="canvas"></canvas>
-        <p class="content">
+        <div class="content">
           On your mobile device, scan this QR code with FluxSync App.
-        </p>
+        </div>
+      </div>
+      <div>
+
       </div>
     </div>
 
