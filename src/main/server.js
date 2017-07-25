@@ -9,7 +9,9 @@ const httpHandler = require('./handlehttp');
 const websocketHandler = require('./handlesocket');
 const bonjour = require('bonjour')();
 const jwt = require('jsonwebtoken');
+const ioJwt = require('socketio-jwt');
 const keytar = require('keytar');
+let secret, desktopId, mobileId, key;
 
 
 console.log("Starting Server...");
@@ -39,16 +41,19 @@ function handler (req, res) {
 }
 
 // handle websocket stream
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
+io.sockets
+  .on('connection', ioJwt.authorize({
+    secret: secret,
+    issuer: desktopId,
+    audience: mobileId,
+    timeout: 15000 // 15 seconds to send the authentication message
+  })).on('authenticated', (socket)=>{
+    //this socket is authenticated, we are good to handle more events from it.
+    console.log('Connected with mobile device!');
   });
-});
 
 // Generate JWT
 ipcMain.on('device.token', (event, arg) => {
-  let secret, desktopId, mobileId, key;
   keytar.getPassword('fluxsync', 'jwt').then(val => {
     secret = val;
     mobileId = arg;
@@ -58,7 +63,7 @@ ipcMain.on('device.token', (event, arg) => {
     return keytar.getPassword('fluxsync', 'key');
   }).then(val=>{
     key = val;
-    jwt.sign({ desktop:desktopId, mobile:mobileId}, secret, { expiresIn: '7d'},
+    jwt.sign({ iss:desktopId, aud:mobileId }, secret, { expiresIn: '7d'},
     (err, token)=>{
       event.sender.send('device.token', JSON.stringify({
         'jwt' : token,
