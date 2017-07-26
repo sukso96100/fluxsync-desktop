@@ -36,13 +36,13 @@ const scanner = new Vue({
         });
 
       });
+    },
+    waitForConnection: function(){
+        ipcRenderer.send('device.wait', 'connection');
+        ipcRenderer.on('device.connected', (event, arg)=>{
+          this.closeModal()
+        });
     }
-    // requestConnect: function(address){
-    //   ipcRenderer.send('device.connect', address)
-    //   ipcRenderer.on('device.connected', (event, arg)=>{
-    //     this.closeModal()
-    //   });
-    // }
   },
   data: {
     devices: [],

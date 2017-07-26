@@ -11,8 +11,11 @@ const bonjour = require('bonjour')();
 const jwt = require('jsonwebtoken');
 const ioJwt = require('socketio-jwt');
 const keytar = require('keytar');
-let secret, desktopId, mobileId, key;
+let jwtSecret, desktopId, mobileId, key, waitEvent;
 
+ipcMain.on('device.wait', (event, arg)=>{
+  waitEvent = event;
+})
 
 console.log("Starting Server...");
 app.listen(0); // Listen on random port
@@ -42,20 +45,30 @@ function handler (req, res) {
 
 // handle websocket stream
 io.sockets
-  .on('connection', ioJwt.authorize({
-    secret: secret,
-    issuer: desktopId,
-    audience: mobileId,
-    timeout: 15000 // 15 seconds to send the authentication message
-  })).on('authenticated', (socket)=>{
-    //this socket is authenticated, we are good to handle more events from it.
-    console.log('Connected with mobile device!');
-  });
+  .on('connection', (socket)=>{
+    let authTimeout = setTimeout(()=>{
+      socket.disconnect('unauthorized');
+    }, 10000); // Wait for 10 sec
+    socket.on('authenticate', (data)=>{
+      clearTimeout(authTimeout);
+      jwt.verify(data.token, jwtSecret, {issuer: desktopId, audience: mobileId},
+      (err, decoded)=>{
+        if(err){
+          socket.emit('unauthorized');
+          socket.disconnect();
+        }else if(!err && decoded){
+          socket.emit('authenticated');
+          waitEvent.sender.send('device.connected','connected')
+        }
+      })
+    });
+
+  })
 
 // Generate JWT
 ipcMain.on('device.token', (event, arg) => {
   keytar.getPassword('fluxsync', 'jwt').then(val => {
-    secret = val;
+    jwtSecret = val;
     mobileId = arg;
     return keytar.getPassword('fluxsync', 'id');
   }).then(val=>{
@@ -63,7 +76,7 @@ ipcMain.on('device.token', (event, arg) => {
     return keytar.getPassword('fluxsync', 'key');
   }).then(val=>{
     key = val;
-    jwt.sign({ iss:desktopId, aud:mobileId }, secret, { expiresIn: '7d'},
+    jwt.sign({ iss:desktopId, aud:mobileId }, jwtSecret, { expiresIn: '7d'},
     (err, token)=>{
       event.sender.send('device.token', JSON.stringify({
         'jwt' : token,
