@@ -28,6 +28,7 @@ const scanner = new Vue({
       ipcRenderer.send('device.token', id);
       // Generate QR Code from token
       ipcRenderer.on('device.token', (event, arg)=>{
+        this.waitForConnection()
         this.showQr = true;
         QRCode.toCanvas(document.getElementById('canvas'), arg,
         (error)=>{

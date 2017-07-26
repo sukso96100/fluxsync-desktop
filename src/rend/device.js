@@ -12,7 +12,7 @@ module.exports = {
         {width: 300, height: 500,
           parent: electronRemote.getCurrentWindow(),
           modal: true});
-      scannerWindow.webContents.openDevTools();
+      // scannerWindow.webContents.openDevTools();
       // and load the index.html of the app.
       scannerWindow.loadURL(url.format({
         pathname: path.join(__dirname, '../res/layout/scanner.html'),
