@@ -9,7 +9,6 @@ const httpHandler = require('./handlehttp');
 const websocketHandler = require('./handlesocket');
 const bonjour = require('bonjour')();
 const jwt = require('jsonwebtoken');
-const ioJwt = require('socketio-jwt');
 const keytar = require('keytar');
 let jwtSecret, desktopId, mobileId, key, waitEvent;
 
