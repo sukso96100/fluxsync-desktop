@@ -48,16 +48,20 @@ io.sockets
     let authTimeout = setTimeout(()=>{
       socket.disconnect('unauthorized');
     }, 10000); // Wait for 10 sec
+    // authenticate
     socket.on('authenticate', (data)=>{
       clearTimeout(authTimeout);
       jwt.verify(data.token, jwtSecret, {issuer: desktopId, audience: mobileId},
       (err, decoded)=>{
         if(err){
+          // If error, disconnect with device
           socket.emit('unauthorized');
           socket.disconnect();
         }else if(!err && decoded){
+          // no connected with device
           socket.emit('authenticated');
-          waitEvent.sender.send('device.connected','connected')
+          waitEvent.sender.send('device.connected','connected');
+          console.log("Connected!");
         }
       })
     });
