@@ -1,6 +1,6 @@
   const settings = require('electron-settings');
   const uuidv4 = require('uuid/v4');
-  const keytar = require('keytar');
+  const keytar = require('keytar-prebuild');
 
   // Check if this app has id. unless, create one.
   keytar.getPassword('fluxsync', 'id').then(val=>{

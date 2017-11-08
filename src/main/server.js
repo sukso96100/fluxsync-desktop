@@ -9,7 +9,7 @@ const httpHandler = require('./handlehttp');
 const websocketHandler = require('./handlesocket');
 const bonjour = require('bonjour')();
 const jwt = require('jsonwebtoken');
-const keytar = require('keytar');
+const keytar = require('keytar-prebuild');
 let jwtSecret, desktopId, mobileId, key, waitEvent;
 
 ipcMain.on('device.wait', (event, arg)=>{
