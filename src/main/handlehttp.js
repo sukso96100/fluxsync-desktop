@@ -1,5 +1,5 @@
 const uuidv4 = require('uuid/v4');
-const keytar = require('keytar-prebuild');
+const keytar = require('keytar');
 const os = require('os');
 const url = require('url');
 const { ipcMain } = require('electron');
