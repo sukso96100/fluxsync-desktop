@@ -1,7 +1,7 @@
 # fluxsync-desktop
 
-A Desktop app of the FluxSync project.
-This app is built on the top of the [Electron Framework](https://electronjs.org/).
+A Desktop app of the FluxSync project.  
+This app is built on the top of the [Electron Framework](https://electronjs.org/).  
 This app is in development stage.
 
 ## Testing the app
