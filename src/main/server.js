@@ -7,7 +7,7 @@ const {ipcMain} = require('electron');
 const os = require('os');
 const httpHandler = require('./handlehttp');
 const websocketHandler = require('./handlesocket');
-const bonjour = require('bonjour')();
+const bonjour = require('bonjour')({multicast:true});
 const jwt = require('jsonwebtoken');
 const keytar = require('keytar');
 let jwtSecret, desktopId, mobileId, key, waitEvent;
@@ -23,8 +23,8 @@ let currentPort = app.address().port
 console.log(`Running server on ${currentPort}`);
 keytar.getPassword('fluxsync', 'id').then(val => {
   // Publish network service on network
-  bonjour.publish({ name: 'FluxSyncDesktopApp',
-   type: 'http', port: currentPort,
+  bonjour.publish({ name: `${os.hostname()}-FluxSync`,
+   type: 'fluxsync', port: currentPort,
    txt: { "deviceid": val, "hostname" : os.hostname()} });
   console.log("publishing service on network");
 
