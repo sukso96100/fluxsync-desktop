@@ -43,6 +43,17 @@ const scanner = new Vue({
         ipcRenderer.on('device.connected', (event, arg)=>{
           this.closeModal()
         });
+    },
+    connectManual: function(){
+      ipcRenderer.send('device.getinfo', "");
+      ipcRenderer.on('device.getinfo', (event, arg)=>{
+        this.showQr = true;
+        QRCode.toCanvas(document.getElementById('canvas'), arg,
+        (error)=>{
+          if (error) console.error(error)
+          console.log('success!');
+        });
+      })
     }
   },
   data: {

@@ -14,37 +14,39 @@
 
   <body>
     <div class="window" id="app">
-      <header class="app-header">
-        <button class="btn btn-default" v-on:click="closeModal()">
-            <span class="icon icon-left"></span>
-          </button>
-        <span>New Connection</span>
-
-      </header>
-      <div v-bind:hidden="showQr">
-        <div class="content">
-          Choose the name below on your mobile device.<br />
-          <b>{{hostname}}</b>
-        </div>
-        <ul class="list-group" >
-          <li class="list-group-item clickable" v-for="device in devices"
-           v-on:click="reqToken(device.id)">
-            <div class="media-body">
-              <strong>{{ device.hostname }}</strong>
-              <p>{{ device.id }}</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div v-bind:hidden="!showQr">
-        <canvas id="canvas"></canvas>
-        <div class="content">
-          On your mobile device, scan this QR code with FluxSync App.
-        </div>
-      </div>
       <div>
+        <header class="app-header">
+          <button class="btn btn-default" v-on:click="closeModal()">
+              <span class="icon icon-left"></span>
+            </button>
+          <span>New Connection</span>
 
+        </header>
+          <div v-bind:hidden="showQr">
+          <div class="content">
+            Choose the name below on your mobile device.<br />
+            <b>{{hostname}}</b>
+          </div>
+          <ul class="list-group" >
+            <li class="list-group-item clickable" v-for="device in devices"
+             v-on:click="reqToken(device.id)">
+              <div class="media-body">
+                <strong>{{ device.hostname }}</strong>
+                <p>{{ device.id }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div v-bind:hidden="!showQr">
+          <canvas id="canvas"></canvas>
+          <div class="content">
+            On your mobile device, scan this QR code with FluxSync App.
+          </div>
+        </div>
+        <div>
+        </div>
       </div>
+      <button class="btn Manual scanner-manual-btn" v-on:click="connectManual">Connect Manually</button>
     </div>
 
     <script src="../../rend/scanner.js"></script>

@@ -89,3 +89,16 @@ ipcMain.on('device.token', (event, arg) => {
   });
 
 });
+
+ipcMain.on('device.getinfo', (event, arg) => {
+  keytar.getPassword('fluxsync', 'id').then(val => {
+    require('dns').lookup(os.hostname(),  (err, add, fam)=> {
+      event.sender.send('device.getinfo', JSON.stringify({
+        'deviceId' : val,
+        'ip': add,
+        'port': currentPort,
+        'hostname': os.hostname
+     }))
+    })
+  })
+});
