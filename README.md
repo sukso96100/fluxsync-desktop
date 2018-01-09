@@ -13,3 +13,4 @@ This app is in development stage.
 - After installing deps, run `npm start` to test the desktop app.
 
 > Example Edit
+> Example Edit 2
