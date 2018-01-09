@@ -11,3 +11,6 @@ This app is in development stage.
 - Install dependencies by running `npm run insdeps`
   - Using windows? install `windows-build-tools` node package golbally before installing deps.
 - After installing deps, run `npm start` to test the desktop app.
+
+> Example Edit
+> Example Edit 2
