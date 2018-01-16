@@ -51,6 +51,11 @@ io.sockets
     // authenticate
     socket.on('authenticate', (data)=>{
       clearTimeout(authTimeout);
+      if(mobileId==undefined){
+        keytar.getPassword('fluxsync','mobileId').then((val)=>{
+          mobileId = val;
+        });
+      }
       jwt.verify(data.token, jwtSecret, {issuer: desktopId, audience: mobileId},
       (err, decoded)=>{
         if(err){
@@ -62,6 +67,7 @@ io.sockets
           socket.emit('authenticated');
           waitEvent.sender.send('device.connected','connected');
           console.log("Connected!");
+          keytar.setPassword('fluxsync','mobileId', mobileId);
         }
       })
     });
@@ -93,7 +99,7 @@ ipcMain.on('device.token', (event, arg) => {
 ipcMain.on('device.getinfo', (event, arg) => {
   keytar.getPassword('fluxsync', 'id').then(val => {
     require('dns').lookup(os.hostname(),  (err, add, fam)=> {
-      event.sender.send('device.getinfo', JSON.stringify({
+ ?    event.sender.send('device.getinfo', JSON.stringify({
         'deviceId' : val,
         'ip': add,
         'port': currentPort,
