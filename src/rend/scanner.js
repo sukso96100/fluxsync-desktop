@@ -21,6 +21,9 @@ const scanner = new Vue({
       ipcRenderer.send('device.find', 'new');
       ipcRenderer.on('device.found', (event, arg)=>{
         this.devices.push(JSON.parse(arg));
+        if(this.isManual){
+          this.reqToken(arg.id);
+        }
       });
     },
     reqToken: function(id){
@@ -47,7 +50,9 @@ const scanner = new Vue({
     connectManual: function(){
       ipcRenderer.send('device.getinfo', "");
       ipcRenderer.on('device.getinfo', (event, arg)=>{
+        this.isManual = true;
         this.showQr = true;
+        console.log(arg);
         QRCode.toCanvas(document.getElementById('canvas'), arg,
         (error)=>{
           if (error) console.error(error)
@@ -60,7 +65,8 @@ const scanner = new Vue({
     devices: [],
     scanning: true,
     showQr: false,
-    hostname: os.hostname()
+    hostname: os.hostname(),
+    isManual: false
   }
 });
 
