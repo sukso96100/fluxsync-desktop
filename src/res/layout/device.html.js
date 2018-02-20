@@ -14,7 +14,7 @@ exports.layout = `
           Status
         </p>
         <button class="btn btn-large btn-default"
-          v-on:click="openScannerModal()">Connect</button>
+          v-on:click="openScannerModal()">{{buttontext}}</button>
       </div>
     </div>
   </div>
