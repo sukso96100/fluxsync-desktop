@@ -67,7 +67,8 @@ io.sockets
           socket.emit('authenticated');
           waitEvent.sender.send('device.connected','connected');
           console.log("Connected!");
-          keytar.setPassword('fluxsync','mobileId', mobileId);
+          // keytar.setPassword('fluxsync','mobileId', mobileId);
+          websocketHandler.handleSocket(socket);
         }
       })
     });
@@ -98,7 +99,7 @@ ipcMain.on('device.token', (event, arg) => {
 
 ipcMain.on('device.getinfo', (event, arg) => {
   keytar.getPassword('fluxsync', 'id').then(val => {
-    require('dns').lookup(os.hostname(),  (err, add, fam)=> {
+    require('dns').lookup(os.hostname(),  (err, addr, fam)=> {
      event.sender.send('device.getinfo', JSON.stringify({
 
         'deviceId' : val,
