@@ -7,7 +7,7 @@ exports.handleSocket = function(socket){
      let content = json.content; //json 파싱으로 title과 content 추출
 
      notifier.notify({
-       title : title
+       title : title,
        content : content
      })  //추출한 title과 content를 notify의 인자로 넘김
   })
