@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { Notification } = electron;
 
 // Module to control application life.
 const app = electron.app;
@@ -7,7 +8,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
-const notifier = require('node-notifier');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,12 +21,11 @@ function createWindow () {
   // Start Websocket Server
   require('./server');
   // Create the browser window.
-  notifier.notify('Message');
-
-  notifier.notify({
-    title: 'My notification',
-    message: 'Hello, there!'
+  let noti = new Notification({
+    title: "Welcome to FluxSync",
+    body: "Enjoy using FluxSync!"
   });
+  noti.show();
 
   mainWindow = new BrowserWindow({width: 400, height: 600, titleBarStyle: 'hidden'});
 
