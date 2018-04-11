@@ -7,6 +7,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+const notifier = require('node-notifier');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,6 +21,13 @@ function createWindow () {
   // Start Websocket Server
   require('./server');
   // Create the browser window.
+  notifier.notify('Message');
+
+  notifier.notify({
+    title: 'My notification',
+    message: 'Hello, there!'
+  });
+
   mainWindow = new BrowserWindow({width: 400, height: 600, titleBarStyle: 'hidden'});
 
   // and load the index.html of the app.
