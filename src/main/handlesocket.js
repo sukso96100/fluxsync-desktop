@@ -3,8 +3,6 @@ const os = require('os');
 
 exports.handleSocket = function(socket){
 
-
-
   socket.on('notify', (data)=>{
     console.log(data);
     console.log(typeof data);
@@ -37,6 +35,10 @@ exports.handleSocket = function(socket){
             body: content,
             actions: actions
           });
+          mobileNoti.on('action', (event, index)=>{
+            console.log(`Action index: ${index}`)
+            socket.emit('notify', {"noti_id":json.noti_id, "index":index});
+          })
           break;
         case 'win32':
           // Windows
@@ -44,7 +46,7 @@ exports.handleSocket = function(socket){
         case 'linux':
           // Linux Desktop
           break;
-          
+
       }
     }
     
