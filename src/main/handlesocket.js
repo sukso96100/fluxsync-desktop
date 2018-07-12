@@ -1,4 +1,4 @@
-const { Notification } = require('electron');
+const { Notification, BrowserWindow } = require('electron');
 const os = require('os');
 
 exports.handleSocket = function(socket){
