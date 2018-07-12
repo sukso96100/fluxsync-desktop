@@ -40,16 +40,30 @@ exports.handleSocket = function(socket){
             socket.emit('notify', {"noti_id":json.noti_id, "index":index});
           })
           break;
+
         case 'win32':
           // Windows
+          mobileNoti = new Notification({
+            title: title,
+            body: content
+          });
+
+          ActionWindow = new BrowserWindow({
+            title: title,
+            body: content
+          });
+          ActionWindow.on('click', (event, index)=>{
+            console.log(`click`);
+          })
           break;
+
         case 'linux':
           // Linux Desktop
           break;
 
       }
     }
-    
+
      mobileNoti.show();
      // notifier.notify({
      //   title : title,
