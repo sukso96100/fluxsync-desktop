@@ -1,4 +1,4 @@
-const { Notification, BrowserWindow } = require('electron');
+const { Notification,BrowserWindow } = require('electron');
 const os = require('os');
 
 exports.handleSocket = function(socket){
@@ -39,22 +39,27 @@ exports.handleSocket = function(socket){
             console.log(`Action index: ${index}`)
             socket.emit('notify', {"noti_id":json.noti_id, "index":index});
           })
+          mobileNoti.show();
           break;
 
         case 'win32':
           // Windows
-          mobileNoti = new Notification({
-            title: title,
-            body: content
-          });
+        const notifier = require('node-notifier');
+        notifier.notify({
+          title: title,
+          message: content,
+          actions: actions,
+          wait: true
+        });
 
-          ActionWindow = new BrowserWindow({
-            title: title,
-            body: content
-          });
-          ActionWindow.on('click', (event, index)=>{
-            console.log(`click`);
-          })
+        let win = new BrowserWindow({
+          show: false,
+          opacity: 0.5,
+          fullscreen: true})
+        notifier.on('click', function(notifieObject, options){
+          win.show()
+        });
+
           break;
 
         case 'linux':
@@ -64,7 +69,7 @@ exports.handleSocket = function(socket){
       }
     }
 
-     mobileNoti.show();
+
      // notifier.notify({
      //   title : title,
      //   message : content

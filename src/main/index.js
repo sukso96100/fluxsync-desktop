@@ -3,7 +3,7 @@ const { Notification } = electron;
 
 // Module to control application life.
 const app = electron.app;
-app.setAppUserModelId("orf,whatever.application-id");
+app.setAppUserModelId("com.sowl.fluxsync");
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
