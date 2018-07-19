@@ -58,6 +58,11 @@ exports.handleSocket = function(socket){
           fullscreen: true})
         notifier.on('click', function(notifieObject, options){
           win.show()
+          win.loadURL(url.format({
+            pathname: path.join(__dirname, '../res/layout/notification.html'),
+            protocol: 'file:',
+            slashes: true
+          }));
         });
 
           break;
