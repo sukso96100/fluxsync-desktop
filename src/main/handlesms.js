@@ -5,10 +5,10 @@ exports.handleSms = (socket, data) => {
     console.log(data);
     console.log(typeof data);
     let json = JSON.parse(data);
-    
+
     let mobileNoti = new Notification({
-        title: title,
-        body: content
+        title: json.name,
+        body: json.body
       });
       mobileNoti.show();
 };
