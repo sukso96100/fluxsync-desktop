@@ -1,4 +1,4 @@
-const { Notification,BrowserWindow } = require('electron');
+const { Notification, BrowserWindow } = require('electron');
 const os = require('os');
 
 exports.handleSocket = function(socket){
@@ -10,13 +10,13 @@ exports.handleSocket = function(socket){
     let title = json.title;
     let content = json.content; //json 파싱으로 title과 content 추출
     let actions = [];
-    let mobileNoti;
 
     if(json.actions == undefined){
-      mobileNoti = new Notification({
+      let mobileNoti = new Notification({
         title: title,
         body: content
       });
+      mobileNoti.show();
     }else{
       json.actions
       .forEach((item)=>{
@@ -30,16 +30,17 @@ exports.handleSocket = function(socket){
       switch(os.platform()){
         case 'darwin':
           // MacOS
-          mobileNoti = new Notification({
+          let mobileNoti = new Notification({
             title: title,
             body: content,
             actions: actions
           });
+          mobileNoti.show();
           mobileNoti.on('action', (event, index)=>{
             console.log(`Action index: ${index}`)
             socket.emit('notify', {"noti_id":json.noti_id, "index":index});
           })
-          mobileNoti.show();
+          
           break;
 
         case 'win32':
