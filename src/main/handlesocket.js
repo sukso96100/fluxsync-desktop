@@ -4,6 +4,7 @@ const os = require('os');
 exports.handleSocket = function(socket){
 
   socket.on('notify', (data)=>{
+
     console.log(data);
     console.log(typeof data);
     let json = JSON.parse(data);
@@ -11,6 +12,16 @@ exports.handleSocket = function(socket){
     let content = json.content; //json 파싱으로 title과 content 추출
     let actions = [];
     let mobileNoti;
+
+    let Iconv = require('iconv').Iconv;
+    let iconv = new Iconv('UTF-8', 'EUC-KR//translit//ignore');
+    
+    let ctitle = iconv.convert(title);
+    console.log(ctitle);
+    console.log(title);
+    let mcontent = iconv.convert(content);
+    console.log(mcontent); //
+    console.log(content);
 
     if(json.actions == undefined){
       mobileNoti = new Notification({
@@ -44,25 +55,14 @@ exports.handleSocket = function(socket){
 
         case 'win32':
           // Windows
+
+
         const notifier = require('node-notifier');
         notifier.notify({
-          title: title,
-          message: content,
-          actions: actions,
+          title: ctitle,
+          message: mcontent,
+          // actions: actions,
           wait: true
-        });
-
-        let win = new BrowserWindow({
-          show: false,
-          opacity: 0.5,
-          fullscreen: true})
-        notifier.on('click', function(notifieObject, options){
-          win.show()
-          win.loadURL(url.format({
-            pathname: path.join(__dirname, '../res/layout/notification.html'),
-            protocol: 'file:',
-            slashes: true
-          }));
         });
 
           break;
