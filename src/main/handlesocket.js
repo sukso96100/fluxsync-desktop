@@ -10,4 +10,8 @@ exports.handleSocket = function(socket){
   socket.on('sms', (data)=>{
     smshandler.handleSms(socket, data);
   });
+
+  socket.on('error', (err)=>{
+    console.log(err);
+  })
 }
